@@ -5185,6 +5185,7 @@ var $elm$browser$Browser$sandbox = function (impl) {
 			view: impl.view
 		});
 };
+var $author$project$Calc$Equal = {$: 'Equal'};
 var $author$project$Calc$inputNumberSub = F2(
 	function (number, model) {
 		return _Utils_update(
@@ -5197,9 +5198,8 @@ var $author$project$Calc$inputNumberSub = F2(
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $author$project$Calc$updateInputNumber = F2(
 	function (number, model) {
-		return ((!(!model.result)) && _Utils_eq(model.operator, $author$project$Calc$None)) ? model : (_Utils_eq(model.input, -1) ? A2($author$project$Calc$inputNumberSub, number, model) : A2($author$project$Calc$inputNumberSub, (model.input * 10) + number, model));
+		return ((!(!model.result)) && (_Utils_eq(model.operator, $author$project$Calc$None) || _Utils_eq(model.operator, $author$project$Calc$Equal))) ? model : (_Utils_eq(model.input, -1) ? A2($author$project$Calc$inputNumberSub, number, model) : A2($author$project$Calc$inputNumberSub, (model.input * 10) + number, model));
 	});
-var $author$project$Calc$Equal = {$: 'Equal'};
 var $author$project$Calc$calcSub = F3(
 	function (result, op, model) {
 		return _Utils_update(
@@ -5252,12 +5252,7 @@ var $author$project$Calc$updatePushOperator = F2(
 	function (op, model) {
 		return _Utils_eq(model, $author$project$Calc$init) ? model : (((!model.result) && (!_Utils_eq(model.input, -1))) ? _Utils_update(
 			model,
-			{
-				display: $elm$core$String$fromInt(model.input),
-				input: -1,
-				operator: op,
-				result: model.input
-			}) : (((!(!model.result)) && (!_Utils_eq(model.input, -1))) ? A2($author$project$Calc$updateCalcExcute, op, model) : ((_Utils_eq(model.operator, $author$project$Calc$Equal) || (!_Utils_eq(model.operator, op))) ? _Utils_update(
+			{display: '', input: -1, operator: op, result: model.input}) : (((!(!model.result)) && (!_Utils_eq(model.input, -1))) ? A2($author$project$Calc$updateCalcExcute, op, model) : ((_Utils_eq(model.operator, $author$project$Calc$Equal) || (!_Utils_eq(model.operator, op))) ? _Utils_update(
 			model,
 			{operator: op}) : (_Utils_eq(model.input, -1) ? model : A2($author$project$Calc$updateCalcExcute, op, model)))));
 	});

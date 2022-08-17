@@ -65,7 +65,7 @@ update msg model =
 
 updateInputNumber : Int -> Model -> Model
 updateInputNumber number model =
-    if model.result /= 0 && model.operator == None then
+    if model.result /= 0 && (model.operator == None || model.operator == Equal) then
         model
 
     else if model.input == -1 then
@@ -102,7 +102,7 @@ updatePushOperator op model =
         { model
             | result = model.input
             , input = -1
-            , display = String.fromInt model.input
+            , display = ""
             , operator = op
         }
 
