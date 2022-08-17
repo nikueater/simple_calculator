@@ -17,10 +17,6 @@ initialize =
     Expr []
 
 
-type BinOp
-    = BinOp Int Int Op
-
-
 type Token
     = Digit Int
     | Operator Op
@@ -117,18 +113,18 @@ calculate expr =
         |> Maybe.withDefault expr
 
 
-toBinOp : Expr -> Maybe BinOp
+toBinOp : Expr -> Maybe ( Int, Int, Op )
 toBinOp (Expr xs) =
     case xs of
         (Digit rhs) :: (Operator op) :: (Digit lhs) :: [] ->
-            Just (BinOp lhs rhs op)
+            Just ( lhs, rhs, op )
 
         _ ->
             Nothing
 
 
-calculateBinOp : BinOp -> Int
-calculateBinOp (BinOp lhs rhs op) =
+calculateBinOp : ( Int, Int, Op ) -> Int
+calculateBinOp ( lhs, rhs, op ) =
     case op of
         Add ->
             lhs + rhs
